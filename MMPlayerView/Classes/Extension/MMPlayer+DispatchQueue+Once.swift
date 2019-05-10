@@ -20,7 +20,7 @@ public extension DispatchQueue {
     }
     
     public class func clear(token: String) {
-        if let index = _onceTokens.index(of: token) {
+        if let index = _onceTokens.firstIndex(of: token) {
             _onceTokens.remove(at: index)
         }
     }
