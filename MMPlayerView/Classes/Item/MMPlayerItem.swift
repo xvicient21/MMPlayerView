@@ -18,12 +18,15 @@ class MMPlayerItem: AVPlayerItem {
     var statusObservation: NSKeyValueObservation?
     var keepUpObservation: NSKeyValueObservation?
     var emptyObservation: NSKeyValueObservation?
-
+    
     weak var delegate: MMPlayerItemProtocol?
     convenience init(asset: AVAsset, delegate: MMPlayerItemProtocol?) {
         self.init(asset: asset, automaticallyLoadedAssetKeys: nil)
         self.delegate = delegate
-      
+        self.setup()
+    }
+    
+    func setup() {
         statusObservation = self.observe(\.status, changeHandler: { [weak self] (item, _) in
             self?.delegate?.status(change: item.status)
         })
